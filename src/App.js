@@ -1,5 +1,8 @@
 import React from "react";
 import "./App.css";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Button from "./components/Button";
 
 function App() {
   const [quote, setQuote] = React.useState({
@@ -11,6 +14,21 @@ function App() {
     "https://source.unsplash.com/random/"
   );
   const [bgColor, setBgColor] = React.useState("qc--black");
+
+  const buttons = [
+    {
+      id: 1,
+      text: "More Wisdom",
+    },
+    {
+      id: 2,
+      text: "Change the Quote",
+    },
+    {
+      id: 3,
+      text: "Change the Image",
+    },
+  ];
 
   React.useEffect(() => {
     fetch("https://type.fit/api/quotes")
@@ -59,9 +77,7 @@ function App() {
   return (
     <div className="App">
       <div className="center--con">
-        <h1 className="title animate__animated animate__flipInX animate__faster">
-          Wisdom Generator 1.0
-        </h1>
+        <Header />
         <div
           className="container"
           style={{ backgroundImage: `url(${image})` }}
@@ -73,17 +89,11 @@ function App() {
           </div>
         </div>
         <br />
-        <button onClick={getAll} className="button--54">
-          More wisdom
-        </button>
+        <Button text={buttons[0].text} getbusy={getAll} />
         <br />
-        <button className="button--54" onClick={getQuote}>
-          Change the Quote
-        </button>
+        <Button text={buttons[1].text} getbusy={getQuote} />
         <br />
-        <button className="button--54" onClick={getImage}>
-          Change the Image
-        </button>{" "}
+        <Button text={buttons[2].text} getbusy={getImage} />
         <br />
         <div className="rgb--squares">
           <div
@@ -100,15 +110,7 @@ function App() {
           ></div>
         </div>
       </div>
-      <p>
-        <br />
-        React / CSS Project
-        <br />
-        <strong>Made by Sergey Vozika</strong>
-        <br />
-        2022
-        <br />
-      </p>
+      <Footer />
     </div>
   );
 }
